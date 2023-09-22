@@ -2,8 +2,11 @@
 
 import RectangleQuiz from "@/app/components/rectangle/rectangleQuiz";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import swal from 'sweetalert';
+import Link from "next/link";
+
+
 
 async function getQuestion(id: string) {
   const response = await fetch(`http://localhost:8081/api/quizs/${id}`);
@@ -21,6 +24,10 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
   const [score, setScore] = useState<number>(0);
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [showSwal, setShowSwal] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'quiz' | 'name'>('quiz'); // Deklarasikan currentPage
+
+
 
   const handleSubmit = async () => {
     const response = await fetch("http://localhost:8081/api/scores", {
@@ -62,11 +69,27 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
     const userSelectedLetter = ["a", "b", "c"][selectedOptionIndex];
 
     if (userSelectedLetter === correctAnswerLetter) {
-      console.log(quizData);
+      console.log(quizData)
       setScore(score + 10);
     }
 
-    if (quizData.length != currentQuestionIndex) {
+    const audio = new Audio("/audio/quiz.mp3");
+    audio.play();
+
+    if (currentQuestionIndex === quizData.length -1 ) {
+      swal({
+        title: "Quiz selesai!",
+        text: `Skore Kamu: ${score}`,
+        icon: "success",
+        timer: 2000,
+        buttons: {
+          confirm: false,
+        },
+      }).then(() => {
+        setSubmitted(true);
+        setShowSwal(true);
+      });
+    } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
@@ -74,6 +97,7 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
   if (quizData.length === 0) {
     return <div>Loading...</div>;
   }
+
 
   const currentQuestion = quizData[currentQuestionIndex];
 
@@ -83,8 +107,7 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
         className="py-20 bg-cover bg-center h-screen overflow-hidden"
         style={{ backgroundImage: "url(/img/background.png)" }}
       >
-        {currentQuestionIndex}
-        {quizData.length != currentQuestionIndex ? (
+        {!showSwal ? (
           <div className="relative flex justify-center mt-11">
             <RectangleQuiz />
             <div className="absolute">
@@ -121,55 +144,51 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
           </div>
         ) : (
           <div>
-<div className="flex justify-center">
-  <RectangleQuiz />
-  <div className="absolute flex justify-center my-14">
-    <div className="bg-[#D2EBF4] rounded-lg p-28 shadow-xl w-96">
-      <h2 className="mb-6 mt-2 font-bold flex justify-center text-[#096A88] text-xl">
-        Input Nama Anda
-      </h2>
-      <div className="mb-4 flex justify-center">
-        <Image
-          className="absolute"
-          src="/img/icon/pensil.png"
-          alt=""
-          width={80}
-          height={80}
-        />
-      </div>
-      {submitted ? (
-        <p className="text-[#096A88]">
-          Terima kasih telah berpartisipasi dalam kuis!
-        </p>
-      ) : (
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Nama Anda"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="flex justify-center items-center w-96 h-7 p-2 mt-2 border border-[#096A88] rounded-md"
-          />
-          <Link href="/homepage">
             <div className="flex justify-center">
-              <button
-                onClick={handleSubmit}
-                className="w-52 h-11 mt-5 bg-[#FF9C41] hover:bg-orange-400 text-white font-bold rounded-md"
-              >
-                Submit
-              </button>
+              <RectangleQuiz />
+              <div className="absolute flex justify-center my-14">
+                <div className="bg-[#D2EBF4] rounded-lg p-28 shadow-xl w-96">
+                  <h2 className="mb-6 mt-2 font-bold flex justify-center text-[#096A88] text-xl">
+                    Input Nama Anda
+                  </h2>
+                  <div className="mb-4 flex justify-center">
+                    <Image
+                      className="absolute"
+                      src="/img/icon/pensil.png"
+                      alt=""
+                      width={80}
+                      height={80}
+                    />
+                  </div>
+                  <div className="mb-6">
+                    <input
+                      type="text"
+                      placeholder="Nama Anda"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="flex justify-center items-center w-96 h-7 p-2 mt-2 border border-[#096A88] rounded-md"
+                    />
+                    <div className="flex justify-center">
+                      <Link href={'/homepage'}>
+                      <button
+                        onClick={handleSubmit}
+                        className="w-52 h-11 mt-5 bg-[#FF9C41] hover:bg-orange-400 text-white font-bold rounded-md"
+                      >
+                        Submit
+                      </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </Link>
-        </div>
-            )}
           </div>
-          </div>
-          </div>
-          </div>
-
         )}
       </div>
     </div>
-
   );
 }
+
+
+
+

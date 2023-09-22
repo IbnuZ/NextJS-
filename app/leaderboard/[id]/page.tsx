@@ -48,10 +48,13 @@ export default function Leaderboard({
             className="py-20 bg-cover bg-center h-screen overflow-hidden"
             style={{ backgroundImage: "url(/img/background.png)" }}
           >
+
+
+
             <div className="relative mb-16 flex justify-center items-center h-screen">
               <RectangleScore />
            
-              <div className="absolute top-40">
+              <div className="absolute top-32">
   <table className="w-[600px] bg-[#D2EBF4] rounded-lg shadow-lg">
     <thead>
       <tr className="bg-[#096A88] text-white">

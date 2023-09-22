@@ -10,6 +10,8 @@ export default function KategoriLeaderboard() {
     <div className="h-screen overflow-hidden">
     <div style={{ backgroundColor: '#096a88', minHeight: '100vh' }}>
         <div className="py-20 bg-cover bg-center " style={{ backgroundImage: "url(/img/background.png)" }}>
+
+
     
         <div className=" relative flex justify-center mt-11">
           <RectangleQuiz/>
@@ -75,9 +77,18 @@ export default function KategoriLeaderboard() {
                       </div>
                       </div>
                       </div>
-                      </div>
-                      </div>
-                      </div>
+                      <div className="mt-7 flex justify-center"> 
+  <div className="mx-5">
+    <Link href={'/homepage'}>
+      <button className="font-semibold mb-4 flex justify-center items-center text-[#096A88] hover: hover:text-orange-400" style={{ fontSize: "25px" }}>
+        Kembali ke Halaman Utama
+      </button>
+    </Link>
+  </div>
+</div>
+
+                 </div>
+                  </div>
     
     
             <div className="flex justify-between">
@@ -97,6 +108,8 @@ export default function KategoriLeaderboard() {
           />
           </div>
         </div> 
+
+      </div>
     
         </div>
         </div>

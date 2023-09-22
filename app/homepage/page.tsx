@@ -3,6 +3,8 @@ import Rectangle from "../components/rectangle/rectangle";
 import Image from "next/image";
 import Link from "next/link";
 
+
+
 export default function HomePage() {
   return (
     <div className="bg-center h-screen overflow-hidden" style={{ backgroundColor: "#096a88", minHeight: "100vh" }}>
@@ -28,9 +30,12 @@ export default function HomePage() {
                 </button>
               </Link>
               <div className="absolute ">
+              <Link href={"/tentanggame"}>
                 <button className="font-bold mb-6 rounded-xl w-80 h-11 bg-blue hover:bg-orange-400 hover:text-slate-600 text-white " style = {{fontSize: '17px'}}>
                   Tentang Game
                 </button>
+                </Link>
+
                 </div>
               </div>
             </div>
