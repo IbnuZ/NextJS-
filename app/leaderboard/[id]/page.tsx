@@ -11,7 +11,7 @@ interface Score {
 }
 
 async function getLeaderboard(id: string) {
-  const res = await fetch(`http://ibnu.posei.me/api/leaderboard/${id}`);
+  const res = await fetch(`https://ibnu.posei.me/api/leaderboard/${id}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

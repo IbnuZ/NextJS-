@@ -9,7 +9,7 @@ import Link from "next/link";
 
 
 async function getQuestion(id: string) {
-  const response = await fetch(`http://ibnu.posei.me/api/quizs/${id}`);
+  const response = await fetch(`https://ibnu.posei.me/api/quizs/${id}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
@@ -30,7 +30,7 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
 
 
   const handleSubmit = async () => {
-    const response = await fetch("http://ibnu.posei.me/api/scores", {
+    const response = await fetch("https://ibnu.posei.me/api/scores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
