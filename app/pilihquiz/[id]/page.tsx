@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 async function getData(id: string) {
-  const res = await fetch(`http://localhost:8081/api/quizCategory/${id}`);
+  const res = await fetch(`http://ibnu.posei.me/api/quizCategory/${id}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
