@@ -28,9 +28,9 @@ export default function TentangGame() {
                 <li>Hari-hari Penting Nasional</li>
                 <li>Tokoh-tokoh Umum</li>
                 <li>Letak Geografi</li>
-                <li>IPA (1 menit)</li>
-                <li>MTK (1 menit)</li>
-                <li>Bahasa Indonesia (45 detik)</li>
+                <li>Ilmu Pengetahuan Alam</li>
+                <li>Matematika</li>
+                <li>Bahasa Indonesia </li>
               </ul>
             </div>
             <div>

@@ -1,7 +1,10 @@
+"use client"
+
 import React from "react";
 import Rectangle from "../components/rectangle/rectangle";
 import Image from "next/image";
 import Link from "next/link";
+import { FacebookShareButton,WhatsappShareButton } from "react-share";
 
 
 
@@ -10,8 +13,19 @@ export default function HomePage() {
     <div className="bg-center h-screen overflow-hidden" style={{ backgroundColor: "#096a88", minHeight: "100vh" }}>
       <div
         className="py-20 bg-cover "
-        style={{ backgroundImage: "url('/img/background.png')" }}
-      >
+        style={{ backgroundImage: "url('/img/background.png')" }}>
+
+<FacebookShareButton
+  url="https://barny-fun.vercel.app/homepage">
+  Bagikan ke Facebook
+</FacebookShareButton>
+
+<WhatsappShareButton
+url="https://barny-fun.vercel.app/homepage">
+  bagikan ke Whatsapp
+
+</WhatsappShareButton>
+          
         <div className="mb-10 flex justify-center ">
           <Image src="/img/logo.png" alt="" width={300} height={150} />
         </div>

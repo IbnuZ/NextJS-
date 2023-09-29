@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 async function getData(id: string) {
-  const res = await fetch(`https://ibnu.posei.me/api/quizCategory/${id}`);
+  const res = await fetch(`http://localhost:8081/api/quizCategory/${id}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -57,7 +57,7 @@ export default async function PilihQuiz({
                     </Link>
 
                     <div
-                      className="w-52 mx-auto font-semibold mt-5 flex justify-center text-center text-[#096A88]"
+                      className="w-60 mx-auto font-semibold mt-5 flex justify-center text-center text-[#096A88]"
                       style={{ fontSize: "25px" }}
                     >
                       {item.name}

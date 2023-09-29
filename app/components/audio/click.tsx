@@ -17,7 +17,7 @@ const SoalButton: React.FC<SoalButtonProps> = ({ text, onClick, soundPath }) => 
   return (
     <button onClick={(event) => { onClick(event); playSound(); }}>
       {text}
-    </button>
+    </button  >
   );
 };
 

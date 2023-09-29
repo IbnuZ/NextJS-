@@ -1,15 +1,15 @@
 "use client";
 
 import RectangleQuiz from "@/app/components/rectangle/rectangleQuiz";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
+import { FacebookShareButton,WhatsappShareButton,FacebookIcon,WhatsappIcon } from "react-share";
 import Image from "next/image";
 import swal from 'sweetalert';
 import Link from "next/link";
 
 
-
 async function getQuestion(id: string) {
-  const response = await fetch(`https://ibnu.posei.me/api/quizs/${id}`);
+  const response = await fetch(`http://localhost:8081/api/quizs/${id}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
@@ -25,12 +25,11 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [showSwal, setShowSwal] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'quiz' | 'name'>('quiz'); // Deklarasikan currentPage
 
 
 
   const handleSubmit = async () => {
-    const response = await fetch("https://ibnu.posei.me/api/scores", {
+    const response = await fetch("http://localhost:8081/api/scores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,12 +43,22 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
     });
 
     if (response.ok) {
-      setSubmitted(true);
+      swal({
+        title: "Selamat Skor Tersimpan!",
+        text: `Skor Kamu: ${score}`,
+        icon: "success",
+        buttons:  {
+          confirm: true,
+
+        },
+      }).then(() => {
+        setSubmitted(true);
+      });
     } else {
       console.error("Gagal mengirim data score:", response.statusText);
     }
   };
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -81,9 +90,8 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
         title: "Quiz selesai!",
         text: `Skore Kamu: ${score}`,
         icon: "success",
-        timer: 2000,
         buttons: {
-          confirm: false,
+          confirm: true,  
         },
       }).then(() => {
         setSubmitted(true);
@@ -119,7 +127,8 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
                   {`Soal.${currentQuestionIndex + 1}/${quizData.length}`}
                 </p>
                 <p
-                  className="font-semibold mt-9 flex justify-center text-[#096a88]"
+                  className="font-semibold mt-9 max-w-xl
+                   flex justify-center text-[#096a88]"
                   style={{ fontSize: "20px" }}
                 >
                   {currentQuestion.question_text}
@@ -144,23 +153,25 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
           </div>
         ) : (
           <div>
-            <div className="flex justify-center">
+            <div className="flex justify-center ">
               <RectangleQuiz />
-              <div className="absolute flex justify-center my-14">
-                <div className="bg-[#D2EBF4] rounded-lg p-28 shadow-xl w-96">
-                  <h2 className="mb-6 mt-2 font-bold flex justify-center text-[#096A88] text-xl">
-                    Input Nama Anda
-                  </h2>
-                  <div className="mb-4 flex justify-center">
+              <div className="absolute flex flex-col items-center my-16 ">
+                <div className="relative bg-[#D2EBF4] rounded-lg p-28 shadow-xl w-96">
+                  <div className="absolute top-7 items-center ">
+                  <h1 className="mt-4 font-bold text-[#096A88] ">
+                    Masukan Nama Anda
+                  </h1>
+                  </div>
+                  <div className=" flex justify-center">
                     <Image
-                      className="absolute"
+                      className="absolute mt- "
                       src="/img/icon/pensil.png"
                       alt=""
-                      width={80}
-                      height={80}
+                      width={100}
+                      height={100}
                     />
                   </div>
-                  <div className="mb-6">
+                  <div className="mt-36">
                     <input
                       type="text"
                       placeholder="Nama Anda"
@@ -179,7 +190,7 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
                       </Link>
                     </div>
                   </div>
-                </div>
+              </div>
               </div>
             </div>
           </div>
