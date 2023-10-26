@@ -57,6 +57,7 @@ export default function SoalQuiz({ params }: { params: { id: string } }) {
             },
           }).then(() => {
             setShowSwal(true);
+            router.push('/homepage')
           });
         } else {
           console.error("Gagal mengirim data score:", response.statusText);
