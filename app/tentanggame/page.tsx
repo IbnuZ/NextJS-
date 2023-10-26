@@ -38,9 +38,7 @@ export default function TentangGame() {
               <div>
                 <p>Quiz Anime: 30 detik</p>
                 <p>Quiz Umum: 45 detik</p>
-                <p>Quiz Akademis Bahasa Indonesia: 45 detik</p>
-                <p>Quiz IPA: 1 menit</p>
-                <p>Quiz MTK: 1 menit</p>
+                <p>Quiz Akademis: 1 Menit</p>
               </div>
             </div>
           </div>

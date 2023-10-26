@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Opening from './components/audio/page'
+import Opening from './components/audio/opening'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,8 +20,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div>
-          {/* <Opening/> */}
         {children}
+        {/* <Opening/> */}
         </div>
        
         </body>

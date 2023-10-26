@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react";
-import RectangleScore from "@/app/components/rectangle/rectangleScore";
 import Link from "next/link";
 
 interface Score {
@@ -85,8 +84,24 @@ export default function Leaderboard({
     <div style={{ backgroundColor: "#096a88", minHeight: "100vh" }}>
       <div className="py-20 bg-cover bg-center h-screen overflow-hidden">
         <div className="relative mb-16 flex justify-center items-center h-screen">
-          <RectangleScore />
-
+        <div className="relative bg-[#D2EBF4] w-[980px] h-[750px] rounded-xl flex justify-center items-center" >
+              <h1 className="absolute top-4">
+        Leaderboard
+      </h1>
+      <div className="absolute flex justify-center bottom-6 space-x-2">
+          {Array.from({ length: totalTables }, (_, index) => (
+            <div
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`cursor-pointer rounded-full w-6 h-6 ${
+                index + 1 === currentPage ? "bg-[#FF9C41]" : "bg-gray-400"
+              }`}
+            ></div>
+          ))}
+          </div>
+      <div className="relative bg-white w-[770px] h-[570px] rounded-xl mt-10 " ></div>
+      
+        </div>
           <div className="absolute top-32" style={{ overflowX: "auto" }}>
             <table className="w-[600px] max-w-screen-xl bg-[#D2EBF4] rounded-lg shadow-lg mt-3">
               <thead>
@@ -115,17 +130,7 @@ export default function Leaderboard({
         >
           Lanjut Ke Quiz
         </Link>
-        <div className="flex justify-center mt-20 space-x-2">
-          {Array.from({ length: totalTables }, (_, index) => (
-            <div
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={`cursor-pointer rounded-full w-6 h-6 ${
-                index + 1 === currentPage ? "bg-[#FF9C41]" : "bg-gray-400"
-              }`}
-            ></div>
-          ))}
-          </div>
+        
         </div>
       
         </div>
